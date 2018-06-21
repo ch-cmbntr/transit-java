@@ -186,8 +186,8 @@ public class TransitTest extends TestCase {
     public void testReadBinary() throws IOException {
 
         byte[] bytes = "foobarbaz".getBytes();
-        byte[] encodedBytes = Base64.getEncoder().encode(bytes);
-        byte[] decoded = (byte[])reader("\"~b" + new String(encodedBytes) + "\"").read();
+        String encodedBytes = Util.encodeBase64(bytes);
+        byte[] decoded = (byte[])reader("\"~b" + encodedBytes + "\"").read();
 
         assertEquals(bytes.length, decoded.length);
 
@@ -565,9 +565,9 @@ public class TransitTest extends TestCase {
     public void testWriteBinary() throws Exception {
 
         byte[] bytes = "foobarbaz".getBytes();
-        byte[] encodedBytes = Base64.getEncoder().encode(bytes);
+        String encodedBytes = Util.encodeBase64(bytes);
 
-        assertEquals(scalarVerbose("\"~b" + new String(encodedBytes) + "\""), writeJsonVerbose(bytes));
+        assertEquals(scalarVerbose("\"~b" + encodedBytes + "\""), writeJsonVerbose(bytes));
     }
 
     public void testWriteSymbol() throws Exception {

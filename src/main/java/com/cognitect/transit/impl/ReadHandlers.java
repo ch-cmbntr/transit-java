@@ -23,8 +23,7 @@ public class ReadHandlers {
 
         @Override
         public Object fromRep(String rep) {
-
-            return Base64.getDecoder().decode(rep.getBytes());
+            return Util.decodeBase64(rep);
         }
     }
 

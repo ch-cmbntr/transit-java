@@ -1,28 +1,31 @@
-# transit-java
+# ch.cmbntr/transit-java
 
-Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from Java.
-
-* [Rationale](https://blog.cognitect.com/blog/2014/7/22/transit)
-* [API docs](https://cognitect.github.io/transit-java/)
-* [Specification](https://github.com/cognitect/transit-format)
-
-This implementation's major.minor version number corresponds to the version of the Transit specification it supports.
-
-_NOTE: Transit is intended primarily as a wire protocol for transferring data between applications. If storing Transit data durably, readers and writers are expected to use the same version of Transit and you are responsible for migrating/transforming/re-storing that data when and if the transit format changes._
+This is a fork of
+[cognitect/transit-java](https://github.com/cognitect/transit-java).
 
 ## Releases and Dependency Information
 
-* Latest release: 1.0.371
-* [All Released Versions](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.cognitect%22%20AND%20a%3A%22transit-java%22)
+- Latest release: WIP
+- [Maven Central Released Versions](https://central.sonatype.com/search?namespace=ch.cmbntr&name=transit-java)
+- [Jitpack Released Versions](https://jitpack.io/#ch.cmbntr/transit-java)
 
 [Maven](https://maven.apache.org/) dependency information:
 
 ```xml
 <dependency>
-  <groupId>com.cognitect</groupId>
-  <artifactId>transit-java</artifactId>
-  <version>1.0.371</version>
+    <groupId>ch.cmbntr</groupId>
+    <artifactId>transit-java</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
 </dependency>
+```
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 ```
 
 ## Usage

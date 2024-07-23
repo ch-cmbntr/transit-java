@@ -5,7 +5,7 @@ This is a fork of
 
 ## Releases and Dependency Information
 
-- Latest release: WIP
+- Latest release: 2.0.*
 - [Maven Central Released Versions](https://central.sonatype.com/search?namespace=ch.cmbntr&name=transit-java)
 - [Jitpack Released Versions](https://jitpack.io/#ch.cmbntr/transit-java)
 
@@ -15,7 +15,7 @@ This is a fork of
 <dependency>
     <groupId>ch.cmbntr</groupId>
     <artifactId>transit-java</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>next-SNAPSHOT</version>
 </dependency>
 ```
 

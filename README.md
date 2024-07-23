@@ -2,26 +2,26 @@
 
 Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from Java.
 
-* [Rationale](http://blog.cognitect.com/blog/2014/7/22/transit)
-* [API docs](http://cognitect.github.io/transit-java/)
-* [Specification](http://github.com/cognitect/transit-format)
+* [Rationale](https://blog.cognitect.com/blog/2014/7/22/transit)
+* [API docs](https://cognitect.github.io/transit-java/)
+* [Specification](https://github.com/cognitect/transit-format)
 
 This implementation's major.minor version number corresponds to the version of the Transit specification it supports.
 
-_NOTE: Transit is a work in progress and may evolve based on feedback. As a result, while Transit is a great option for transferring data between applications, it should not yet be used for storing data durably over time. This recommendation will change when the specification is complete._
+_NOTE: Transit is intended primarily as a wire protocol for transferring data between applications. If storing Transit data durably, readers and writers are expected to use the same version of Transit and you are responsible for migrating/transforming/re-storing that data when and if the transit format changes._
 
 ## Releases and Dependency Information
 
-* Latest release: 0.8.327
-* [All Released Versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.cognitect%22%20AND%20a%3A%22transit-java%22)
+* Latest release: 1.0.371
+* [All Released Versions](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.cognitect%22%20AND%20a%3A%22transit-java%22)
 
-[Maven](http://maven.apache.org/) dependency information:
+[Maven](https://maven.apache.org/) dependency information:
 
 ```xml
 <dependency>
   <groupId>com.cognitect</groupId>
   <artifactId>transit-java</artifactId>
-  <version>0.8.327</version>
+  <version>1.0.371</version>
 </dependency>
 ```
 
@@ -196,7 +196,7 @@ this:
   intended to be used by layered Transit libraries, not by
   applications using Transit.
   
-The [Clojure Transit library](http://github.com/cognitect/transit-clj)
+The [Clojure Transit library](https://github.com/cognitect/transit-clj)
 is implemented using this layering approach and can be used as an
 example of how to implement support for additional JVM languages
 without having to implement all of Transit from scratch.
@@ -213,7 +213,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

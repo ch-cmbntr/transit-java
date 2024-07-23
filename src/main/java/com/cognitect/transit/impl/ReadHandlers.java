@@ -4,7 +4,6 @@
 package com.cognitect.transit.impl;
 
 import com.cognitect.transit.*;
-import org.apache.commons.codec.binary.Base64;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,7 +24,7 @@ public class ReadHandlers {
         @Override
         public Object fromRep(String rep) {
 
-            return Base64.decodeBase64(rep.getBytes());
+            return Base64.getDecoder().decode(rep.getBytes());
         }
     }
 
@@ -56,8 +55,9 @@ public class ReadHandlers {
         @Override
         public ArrayReader<Object,Map<Object, Object>,Object> arrayReader() {
             return new ArrayReader<Object, Map<Object, Object>, Object>() {
+                private final Object MARKER = new Object();
                 Map<Object, Object> m = null;
-                Object next_key = null;
+                Object next_key = MARKER;
 
                 @Override
                 public Object init() {
@@ -72,9 +72,9 @@ public class ReadHandlers {
 
                 @Override
                 public Object add(Object ar, Object item) {
-                    if (next_key != null) {
+                    if (next_key != MARKER) {
                         m.put(next_key, item);
-                        next_key = null;
+                        next_key = MARKER;
                     } else {
                         next_key = item;
                     }
@@ -94,7 +94,7 @@ public class ReadHandlers {
         @Override
         public Object fromRep(String rep) {
 
-            return new Double(rep);
+            return Double.valueOf(rep);
         }
     }
 

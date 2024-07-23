@@ -46,19 +46,21 @@ public interface Reader {
     /**
      * Reads a single value from an input source
      * @param consumeAndContinue consumes the value and tells if the next value shall be read
+     * @return the number of consumed values
      */
-    default <T> void readWhile(final Predicate<? super T> consumeAndContinue) {
+    default <T> long readWhile(final Predicate<? super T> consumeAndContinue) {
         @SuppressWarnings("unchecked")
         final T eof = (T) new Object();
         T val;
-        boolean cont;
+        long cnt = 0L;
         do {
             val = read(eof);
             if (val == eof) {
-                return;
+                break;
             }
-            cont = consumeAndContinue.test(eof);
-        } while (cont);
+            cnt++;
+        } while (consumeAndContinue.test(val));
+        return cnt;
     }
 
 }

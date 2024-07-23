@@ -5,7 +5,7 @@
   <groupId>ch.cmbntr</groupId>
   <artifactId>transit-java</artifactId>
   <packaging>jar</packaging>
-  <version>2.0.0</version>
+  <version>2.0.1</version>
   <name>transit-java</name>
   <description>Transit is a data format and a set of libraries for conveying values between applications written in different languages. This library provides support for marshalling Transit data to/from Java.</description>
   <url>http://github.com/cmbntr/transit-java</url>

@@ -38,7 +38,7 @@ import com.cognitect.transit.Reader;
 import com.cognitect.transit.Writer;
 
 // Write the data to a stream
-OutputStream out = new ByteArrayOutputStream();
+ByteArrayOutputStream out = new ByteArrayOutputStream();
 Writer writer = TransitFactory.writer(TransitFactory.Format.MSGPACK, out);
 writer.write(data);
 
@@ -46,7 +46,8 @@ writer.write(data);
 InputStream in = new ByteArrayInputStream(out.toByteArray());
 Reader reader = TransitFactory.reader(TransitFactory.Format.MSGPACK, in);
 Object data = reader.read();
-Object dataEOF = reader.read(null);
+Object dataOrEOF = reader.read(null);
+long cnt = reader.readWhile(val -> !"foo".equals(val));
 ```
 
 ### Custom write handler

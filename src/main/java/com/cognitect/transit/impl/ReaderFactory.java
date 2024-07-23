@@ -8,6 +8,7 @@ import com.cognitect.transit.SPI.ReaderSPI;
 import com.fasterxml.jackson.core.JsonFactory;
 import org.msgpack.MessagePack;
 
+import java.io.EOFException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +88,8 @@ public class ReaderFactory {
 
     private abstract static class ReaderImpl implements Reader, ReaderSPI {
 
+        private static final Object EOF_MARKER = new Object();
+
         InputStream in;
         Map<String, ReadHandler<?,?>> handlers;
         DefaultReadHandler defaultHandler;
@@ -107,10 +110,29 @@ public class ReaderFactory {
         @Override
         @SuppressWarnings("unchecked")
         public <T> T read() {
-            if (!initialized) initialize();
+            if (!initialized) {
+                initialize();
+            }
             try {
                 return (T) p.parse(cache.init());
             } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        @Override
+        @SuppressWarnings({ "unchecked", "unused" })
+        public <T> T read(final T eofValue) {
+            if (!initialized) {
+                initialize();
+            }
+            try {
+                T eof = (T) EOF_MARKER;
+                T val = (T) p.parse(cache.init(), eof);
+                return val == eof ? eofValue : val;
+            } catch (final EOFException eof) {
+                return eofValue;
+            } catch (final Throwable e) {
                 throw new RuntimeException(e);
             }
         }

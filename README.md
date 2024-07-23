@@ -46,6 +46,7 @@ writer.write(data);
 InputStream in = new ByteArrayInputStream(out.toByteArray());
 Reader reader = TransitFactory.reader(TransitFactory.Format.MSGPACK, in);
 Object data = reader.read();
+Object dataEOF = reader.read(null);
 ```
 
 ### Custom write handler

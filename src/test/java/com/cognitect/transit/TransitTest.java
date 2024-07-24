@@ -26,6 +26,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TransitTest extends TestCase {
 
@@ -971,6 +973,33 @@ public class TransitTest extends TestCase {
         assertEquals("[\"~#point\",[37,42]]",
                 write(new Point(37, 42), TransitFactory.Format.JSON, TransitFactory.writeHandlerMap(customHandlers)));
 
+    }
+
+    public void testRoundtripWithCaching() throws Exception {
+        for (TransitFactory.Format fmt : Arrays.asList( //
+                TransitFactory.Format.JSON, //
+                TransitFactory.Format.JSON_VERBOSE //
+        )) {
+            assertRoundtripWithCaching(WriteCache.CACHE_CODE_DIGITS, fmt);
+            assertRoundtripWithCaching(WriteCache.MAX_CACHE_ENTRIES / 2, fmt);
+            assertRoundtripWithCaching(WriteCache.MAX_CACHE_ENTRIES - 1, fmt);
+            assertRoundtripWithCaching(WriteCache.MAX_CACHE_ENTRIES, fmt);
+            assertRoundtripWithCaching(2 * WriteCache.MAX_CACHE_ENTRIES, fmt);
+        }
+    }
+
+    private void assertRoundtripWithCaching(int numItems, TransitFactory.Format fmt) {
+        String itemTemplate = String.format("k%%0%dd", WriteCache.MIN_SIZE_CACHEABLE);
+
+        Map<String, Map<String, Long>> m = new TreeMap<>(IntStream.range(0, numItems) //
+                .mapToObj(idx -> String.format(itemTemplate, idx)) //
+                .collect(Collectors.toMap(x -> x, x -> Collections.singletonMap(x, 0L))));
+
+        List<?> data = Arrays.asList(m, m);
+
+        String json = write(data, fmt);
+        Object parsed = reader(json).read();
+        assertEquals(data, parsed);
     }
 
 }
